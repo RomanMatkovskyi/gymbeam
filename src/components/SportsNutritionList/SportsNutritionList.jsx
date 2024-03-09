@@ -3,6 +3,7 @@ import {
   CategoryItem,
   CardLink,
   ProductImg,
+  ProductDesriptionWrapper,
   RatingElement,
   RatedElement,
   ProductTitle,
@@ -26,13 +27,13 @@ const SportsNutritionList = ({ data }) => {
             <CategoryItem key={id}>
               <CardLink href={product_url} target="_blank" rel="noreferrer">
                 <ProductImg src={thumbnail} alt="name" />
-                <div>
+                <ProductDesriptionWrapper>
                   <ProductTitle>{name}</ProductTitle>
                   <div>
                     <RatingWrapper>
                       <RatingElement>
                         <RatedElement
-                          rating={`${rating_summary}%`}
+                          $rating={`${rating_summary}%`}
                         ></RatedElement>
                       </RatingElement>
                       <p>{`${rating_summary}%`}</p>
@@ -40,7 +41,7 @@ const SportsNutritionList = ({ data }) => {
                     </RatingWrapper>
                     <p>{formatted_price}</p>
                   </div>
-                </div>
+                </ProductDesriptionWrapper>
               </CardLink>
             </CategoryItem>
           );

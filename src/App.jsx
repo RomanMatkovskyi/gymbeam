@@ -7,7 +7,9 @@ import {
   SectionDescr,
   SpanColor,
 } from "./App.styled";
-import SportsNutritionList from "./api/components/SportsNutritionList/SportsNutritionList";
+import SportsNutritionList from "./components/SportsNutritionList/SportsNutritionList";
+import FilterPanel from "./components/FilterPanel/FilterPanel";
+
 export const App = () => {
   const [data, setData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -20,8 +22,6 @@ export const App = () => {
       })
       .catch((err) => console.log("Something went wrong", err));
   }, []);
-  console.log("categoryData", categoryData);
-  console.log("filterData", filterData);
   return (
     <MainContainer>
       <MainTitle>Sports Nutrition</MainTitle>
@@ -41,6 +41,7 @@ export const App = () => {
         the main pillars, thanks to which you can achieve your goals much more
         easily.{" "}
       </p>
+      <FilterPanel data={filterData} />
       <SportsNutritionList data={categoryData} />
     </MainContainer>
   );
