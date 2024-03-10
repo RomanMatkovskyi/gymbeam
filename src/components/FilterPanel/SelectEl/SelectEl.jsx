@@ -1,28 +1,40 @@
 import { nanoid } from "nanoid";
-import { Fragment, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Fragment } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { ChekboxController } from "../../../helpers/checkboxController";
+import { selectController } from "../../../helpers/selectController";
 
 const SelectEl = ({ dataOpt }) => {
+  const location = useLocation();
   let [searchParams, setSearchParams] = useSearchParams();
   const checkBoxArray = dataOpt.options.slice(0, 5);
   const selectBoxArray = dataOpt.options.slice(5, dataOpt.options.length);
-  const [filterValue, setFilterValue] = useState([]);
-
-  useEffect(() => {}, [filterValue]);
 
   const handleCheckbox = (e) => {
     const value = e.target.value;
 
     if (e.target.checked) {
-      setFilterValue([...filterValue, value]);
       searchParams.append(dataOpt.code, value);
       setSearchParams(searchParams);
     } else {
-      setFilterValue(filterValue.filter((item) => item !== value));
       searchParams.delete(dataOpt.code, value);
       setSearchParams(searchParams);
     }
   };
+
+  const handleSelect = (e) => {
+    const value = e.target.value;
+
+    const isSelected = selectController(location.search, dataOpt.code, value);
+    if (isSelected === false) {
+      searchParams.append(dataOpt.code, value);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.delete(dataOpt.code, value);
+      setSearchParams(searchParams);
+    }
+  };
+
   return (
     <>
       {checkBoxArray.map((el) => {
@@ -33,7 +45,7 @@ const SelectEl = ({ dataOpt }) => {
               id={el.name}
               name={el.name}
               value={el.value}
-              checked={filterValue.includes(el.value)}
+              checked={ChekboxController(dataOpt.code, el.value)}
               onChange={handleCheckbox}
             />
             <label htmlFor={el.name}>{`${el.name}(${el.count})`}</label>
@@ -42,7 +54,7 @@ const SelectEl = ({ dataOpt }) => {
       })}
 
       {selectBoxArray.length !== 0 && (
-        <select key={dataOpt.name} name={dataOpt.name}>
+        <select key={dataOpt.name} name={dataOpt.name} onChange={handleSelect}>
           <>
             <option value="">More</option>
             {selectBoxArray.options !== 0 &&

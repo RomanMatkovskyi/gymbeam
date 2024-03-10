@@ -1,9 +1,9 @@
 import axios from "axios";
+import Notiflix from "notiflix";
 
-axios.defaults.baseURL =
-  "https://gymbeam.sk/rest/V1/gb/catalog/products?category_ids[]=2416";
+axios.defaults.baseURL = "";
 
-export const fetchFilterProducts = async (categoryName, filterId) => {
+export const fetchFilterProducts = async (searchQuery) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -11,9 +11,15 @@ export const fetchFilterProducts = async (categoryName, filterId) => {
   };
 
   try {
-    const resp = await axios.get(`&${categoryName}[]=${filterId}`, config);
-    return resp.data;
+    const resp = await axios.get(
+      `https://gymbeam.sk/rest/V1/gb/catalog/products?category_ids[]=2416&${searchQuery}`,
+      config
+    );
+    const data = await resp;
+    return data;
   } catch (error) {
-    console.log("Error while fetching data", error);
+    Notiflix.Notify.failure(
+      "To run this web site please disable your cross-origion restrictions"
+    );
   }
 };

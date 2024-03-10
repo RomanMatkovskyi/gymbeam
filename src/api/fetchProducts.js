@@ -1,4 +1,5 @@
 import axios from "axios";
+import Notiflix from "notiflix";
 
 export const fetchAllProducts = async () => {
   const config = {
@@ -14,6 +15,8 @@ export const fetchAllProducts = async () => {
     );
     return resp.data;
   } catch (error) {
-    console.log("Error while fetching data", error);
+    Notiflix.Notify.failure(
+      "To run this web site please disable your cross-origion restrictions"
+    );
   }
 };
