@@ -1,16 +1,18 @@
 import { Fragment, useState } from "react";
-import SelectEl from "./SelectEl/SelectEl";
 import { nanoid } from "nanoid";
 import { useSearchParams } from "react-router-dom";
 
+import SelectEl from "./SelectEl/SelectEl";
+import SingleFilter from "./SingleFilter/SingleFilter";
 import {
   FilterBtn,
   SingleInputsContainer,
   FilterName,
 } from "./FilterPanel.styled";
-import SingleFilter from "./SingleFilter/SingleFilter";
+import PriceBar from "./PriceBar/PriceBar";
 
 const FilterPanel = ({ data }) => {
+  const priceData = data.find((obj) => obj["code"] === "price");
   const [filterOut, setFilterOut] = useState(false);
   let [_, setSearchParams] = useSearchParams();
 
@@ -54,6 +56,14 @@ const FilterPanel = ({ data }) => {
             );
           }
         })}
+
+      {priceData && filterOut && (
+        <SingleInputsContainer>
+          <FilterName>Cena</FilterName>
+          <PriceBar data={priceData} />
+        </SingleInputsContainer>
+      )}
+
       <SingleInputsContainer>
         {data &&
           filterOut &&

@@ -14,7 +14,9 @@ export const filterQueryCreator = (filterQuery) => {
   for (const key in paramsObject) {
     if (Array.isArray(paramsObject[key])) {
       newQueryString += paramsObject[key]
-        .map((val) => `${key}[]=${val}`)
+        .map((val) => {
+          return key === "price" ? `${key}=${val}` : `${key}[]=${val}`;
+        })
         .join("&");
     } else {
       newQueryString += `${key}=${paramsObject[key]}`;
