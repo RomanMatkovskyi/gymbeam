@@ -45,6 +45,7 @@ export const App = () => {
       <SectionDescription />
       <FilterPanel data={filterData} />
       <SportsNutritionList data={categoryData} />
+      {categoryData.length === 0 && <h2>No product found</h2>}
     </MainContainer>
   );
 };
