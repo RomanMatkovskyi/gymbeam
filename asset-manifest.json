@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/gymbeam/static/css/main.97b0e59e.css",
-    "main.js": "/gymbeam/static/js/main.76e03097.js",
+    "main.js": "/gymbeam/static/js/main.cc617c58.js",
     "index.html": "/gymbeam/index.html",
     "main.97b0e59e.css.map": "/gymbeam/static/css/main.97b0e59e.css.map",
-    "main.76e03097.js.map": "/gymbeam/static/js/main.76e03097.js.map"
+    "main.cc617c58.js.map": "/gymbeam/static/js/main.cc617c58.js.map"
   },
   "entrypoints": [
     "static/css/main.97b0e59e.css",
-    "static/js/main.76e03097.js"
+    "static/js/main.cc617c58.js"
   ]
 }
